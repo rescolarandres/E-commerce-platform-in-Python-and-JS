@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>H&M Capstone</title>
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Libraries Stylesheet -->
+    <link
+      href="/static/lib/owlcarousel/assets/owl.carousel.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="/static/css/style.css" rel="stylesheet" />
+  </head>
+
+  <body data-my-var="{{ session['email'] }}">
+    <main>
+    <!-- Topbar Start -->
+    <div class="container-fluid">
+      <div class="row bg-secondary py-2 px-xl-5">
+        <div class="col-lg-6 d-none d-lg-block">
+          <div class="d-inline-flex align-items-center">
+            <a class="text-dark" href="">FAQs</a>
+            <span class="text-muted px-2">|</span>
+            <a class="text-dark" href="">Help</a>
+            <span class="text-muted px-2">|</span>
+            <a class="text-dark" href="">Support</a>
+          </div>
+        </div>
+        <div class="col-lg-6 text-center text-lg-right">
+          <div class="d-inline-flex align-items-center">
+            <a class="text-dark px-2" href="">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a class="text-dark px-2" href="">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a class="text-dark px-2" href="">
+              <i class="fab fa-instagram"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="row align-items-center py-3 px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block">
+          <style>
+            .logo {
+              max-width: 40%;
+            }
+          </style>
+          <img src="/static/img/hm_logo.png" class="logo" />
+        </div>
+        <div class="col-lg-6 col-6 text-left">
+          <form action="/search" method="POST" id="searchForm">
+            <div class="input-group">
+              <input
+                type="text"
+                class="form-control"
+                placeholder="Search for products"
+                name="itemToSearch"
+                id="itemToSearch"
+              />
+              <div class="input-group-append">
+                <span class="input-group-text bg-transparent text-primary">
+                  <i class="fa fa-search"></i>
+                </span>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-lg-3 col-6 text-right">
+          <a href="/cart" class="btn border">
+            <i class="fas fa-shopping-cart text-primary"></i>
+            <span class="badge" id="cartCount">0</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- Topbar End -->
+
+    <!-- Navbar Start -->
+    <div class="container-fluid mb-5">
+      <div class="row border-top px-xl-5">
+        <div class="col-lg-3 d-none d-lg-block">
+          <a
+            class="btn shadow-none d-flex align-items-center justify-content-between bg-primary text-white w-100"
+            data-toggle="collapse"
+            href="#navbar-vertical"
+            style="height: 65px; margin-top: -1px; padding: 0 30px"
+          >
+            <h6 class="m-0">Categories</h6>
+            <i class="fa fa-angle-down text-dark"></i>
+          </a>
+          <nav
+            class="collapse show navbar navbar-vertical navbar-light align-items-start p-0 border border-top-0 border-bottom-0"
+            id="navbar-vertical"
+          >
+            <div class="navbar-nav w-100 overflow-hidden" style="height: 410px">
+              <div class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="men_dropdown"
+                  data-toggle="dropdown"
+                  data-my-var="{{ men_categories }}"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Men</a
+                >
+              </div>
+              <div class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="women_dropdown"
+                  data-toggle="dropdown"
+                  data-my-var="{{ women_categories }}"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Women</a
+                >
+              </div>
+              <div class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="babies_dropdown"
+                  data-toggle="dropdown"
+                  data-my-var="{{ babies_categories }}"
+                  role="button"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Babies</a
+                >
+              </div>
+            </div>
+          </nav>
+        </div>
+        <div class="col-lg-9">
+          <nav
+            class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0"
+          >
+            <button
+              type="button"
+              class="navbar-toggler"
+              data-toggle="collapse"
+              data-target="#navbarCollapse"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div
+              class="collapse navbar-collapse justify-content-between"
+              id="navbarCollapse"
+            >
+              <div class="navbar-nav mr-auto py-0">
+                <a href="templates/index.html" class="nav-item nav-link active"
+                  >Home</a
+                >
+              </div>
+            </div>
+            <div class="navbar-nav ml-auto py-0">
+                <a
+                  href="#"
+                  data-toggle="modal"
+                  data-target="#loginModal"
+                  id="emailLink"
+                ></a>
+              </div>
+          </nav>
+          <div id="header-carousel" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active" style="height: 410px">
+                <img
+                  class="img-fluid"
+                  src="/static/img/nano_modelo.png"
+                  alt="Image"
+                />
+                <div
+                  class="carousel-caption d-flex flex-column align-items-center justify-content-center"
+                >
+                  <div class="p-3" style="max-width: 700px">
+                    <h4
+                      class="text-light text-uppercase font-weight-medium mb-3"
+                    >
+                      Nano Special Collection
+                    </h4>
+                    <h3 class="display-4 text-white font-weight-semi-bold mb-4">
+                      Totally new 33 products
+                    </h3>
+                    <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item" style="height: 410px">
+                <img
+                  class="img-fluid"
+                  src="/static/img/nano_kimoa.jpg"
+                  alt="Image"
+                />
+                <div
+                  class="carousel-caption d-flex flex-column align-items-center justify-content-center"
+                >
+                  <div class="p-3" style="max-width: 700px">
+                    <h4
+                      class="text-light text-uppercase font-weight-medium mb-3"
+                    >
+                      33% Off Your First Order
+                    </h4>
+                    <h3
+                      class="display-4 text-white font-weight-semi-bold mb-4"
+                    ></h3>
+                    <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <a
+              class="carousel-control-prev"
+              href="#header-carousel"
+              data-slide="prev"
+            >
+              <div class="btn btn-dark" style="width: 45px; height: 45px">
+                <span class="carousel-control-prev-icon mb-n2"></span>
+              </div>
+            </a>
+            <a
+              class="carousel-control-next"
+              href="#header-carousel"
+              data-slide="next"
+            >
+              <div class="btn btn-dark" style="width: 45px; height: 45px">
+                <span class="carousel-control-next-icon mb-n2"></span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Navbar End -->
+
+    <!-- Articles Display -->
+    <div class="container-fluid pt-5">
+      <div class="row px-xl-5 pb-3">
+        {% for article in articles %}
+        <!-- Shop Product Start -->
+        <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+          <div class="card product-item border-0 mb-4">
+            <div
+              class="card-header product-img position-relative overflow-hidden bg-transparent border p-0"
+            >
+              <img
+                class="img-fluid w-100"
+                data-product="{{article.product_type_name}}"
+                data-color="{{article.colour_group_name}}"
+              />
+            </div>
+            <div
+              class="card-body border-left border-right text-center p-0 pt-4 pb-3"
+            >
+              <h6 class="text-truncate mb-3">{{article.product_type_name}}</h6>
+              <h6>Color: {{article.colour_group_name}}</h6>
+              <div class="d-flex justify-content-center">
+                <h6>${{article.price*1000}}</h6>
+              </div>
+            </div>
+            <div
+              class="card-footer d-flex justify-content-between bg-light border"
+            >
+              <a href="" class="btn btn-sm text-dark"
+                ><i class="fas fa-eye text-primary mr-1"></i>View Detail</a
+              >
+              <a
+                href=""
+                class="btn btn-sm text-dark p-0"
+                data-product="{{article.product_type_name}}"
+                data-price="{{article.price*1000}}"
+                ><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To
+                Cart</a
+              >
+            </div>
+          </div>
+        </div>
+        <!-- Shop Product End -->
+        {% endfor %}
+      </div>
+    </div>
+    <!--  Articles Display End -->
+
+    <!-- Login Modal -->
+    <form action="/login" method="POST">
+      <div
+        class="modal fade"
+        id="loginModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="loginModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="loginModalLabel">Login</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
+                />
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="passwordLogin"
+                  name="password"
+                  placeholder="Password"
+                />
+              </div>
+              <!-- Register link -->
+              <div class="text-center">
+                <p>
+                  Not a member?
+                  <a
+                    href="#"
+                    data-toggle="modal"
+                    data-target="#registerModal"
+                    data-dismiss="modal"
+                    >Register</a
+                  >
+                </p>
+                <p>or sign up with:</p>
+                <button type="button" class="btn btn-link btn-floating mx-1">
+                  <i class="fab fa-facebook-f"></i>
+                </button>
+
+                <button type="button" class="btn btn-link btn-floating mx-1">
+                  <i class="fab fa-google"></i>
+                </button>
+
+                <button type="button" class="btn btn-link btn-floating mx-1">
+                  <i class="fab fa-twitter"></i>
+                </button>
+
+                <button type="button" class="btn btn-link btn-floating mx-1">
+                  <i class="fab fa-github"></i>
+                </button>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!-- Login Modal End -->
+
+    <!-- Register Modal -->
+    <form id="registerForm">
+      <div
+        class="modal fade"
+        id="registerModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="registerModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="registerModalLabel">Register</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="email">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
+                />
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="passwordRegister"
+                  name="passwordRegister"
+                  placeholder="Password"
+                />
+                <div class="form-group">
+                <label for="password">Repeat password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="passwordRegister2"
+                  name="passwordRegister2"
+                  placeholder="Password"
+                />
+                <div class="text-center">
+                  <p>
+                    Already a member?
+                    <a
+                      href="#"
+                      data-toggle="modal"
+                      data-target="#loginModal"
+                      data-dismiss="modal"
+                      >Login</a
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-primary" id="regsiterButton">Register</button>
+            </div>
+          </div>
+          <div class="modal-footer" id="modalFooter">
+        </div>
+      </div>
+    </form>
+
+    <!--  Register Modal End -->
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/lib/easing/easing.min.js"></script>
+    <script src="/static/lib/owlcarousel/owl.carousel.min.js"></script>
+
+    <!-- Contact Javascript File -->
+    <script src="/static/mail/jqBootstrapValidation.min.js"></script>
+    <script src="/static/mail/contact.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/static/js/main.js"></script>
+  </body>
+</html>
