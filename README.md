@@ -20,6 +20,8 @@ The system has three main pages: Index, Search and Cart
   ## Technical Details:
       1. The page uses a wide range of utilities, such as forms, cookies, localStorage or html functionality. This was done just for showing porpoises, to show that all these type of features were succesfully implemented, leaving aside coding standards and performance.
       2. An API was used to obtain the pictures of the articles: this API uses the type of product and color to query photos of those items.
+      3. The website uses data from a real database, not just from a static json.
+      
 
   ## Possible improvements:
     * Improving the search engine, as the specific word has to be input if results are to be shown.
