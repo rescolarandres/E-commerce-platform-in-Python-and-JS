@@ -6,8 +6,8 @@ import json
 
 def connect_tcp_socket() -> sqlalchemy.engine.base.Engine:
     """ Initializes a TCP connection pool for a Cloud SQL instance of MySQL. """
-    db_host = ''
-    db_user = ''
+    db_host = '3'
+    db_user = 'root'
     db_pass = ''
     db_name = 'main'
     db_port = 3306
@@ -79,7 +79,7 @@ def index():
 
 @hm.route("/register", methods=["POST"])
 def handle_register():
-    password = request.form["password"]
+    password = request.form["passwordRegister"]
     email = request.form["email"]
 
     hashed_password = generate_password_hash(password=password)
@@ -143,5 +143,5 @@ def cart():
     return render_template('cart.html')
 
 
-
-hm.run(debug=True, port=8080)
+if __name__ == '__main__':
+    hm.run(host='0.0.0.0', port=8080, debug=True)
