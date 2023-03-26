@@ -45,29 +45,6 @@ function checkCookie(name) {
   return false;
 }
 
-function createDropdownMenus(items) {
-  // Create Blocks of articles categories function
-
-  var dropdownMenus = document.createElement("div");
-  dropdownMenus.classList.add(
-    "dropdown-menu",
-    "position-absolute",
-    "bg-secondary",
-    "border-0",
-    "rounded-0",
-    "w-100",
-    "m-0"
-  );
-  for (let i = 0; i < items.length; i++) {
-    var dropdownItem = document.createElement("a");
-    dropdownItem.classList.add("dropdown-item");
-    dropdownItem.setAttribute("href", "#");
-    dropdownItem.textContent = items[i];
-    dropdownMenus.appendChild(dropdownItem);
-  }
-  return dropdownMenus;
-}
-
 function addToCart(product, price) {
   // Add elements to the Cart
 
@@ -108,6 +85,7 @@ function addToCart(product, price) {
 function displayCart(shoppingCart) {
   // Displaying Shopping Cart
 
+  // Create a table body element
   var rows = document.createElement("tbody");
   shoppingCart.forEach((item) => {
     var row = document.createElement("tr");
@@ -131,10 +109,12 @@ function displayCart(shoppingCart) {
 }
 
 function computeCheckout() {
+  // Compute Shopping Cart checkout function
   var subtotalElement = document.getElementById("subtotal");
   var shippingElement = document.getElementById("shipping");
   var totalElement = document.getElementById("total");
 
+  // Parsing the shopping cart to obtain the information
   var shoppingCart = JSON.parse(localStorage.shoppingCart);
   var total = 0;
   for (let i = 0; i < shoppingCart.length; i++) {
@@ -147,6 +127,7 @@ function computeCheckout() {
 }
 
 function refreshCart() {
+  // Function to refresh the shopping Cart and delete it in case expire time has been reached
   let cart = JSON.parse(localStorage.shoppingCart);
   const now = new Date();
 
@@ -156,8 +137,31 @@ function refreshCart() {
   }
 }
 
+function createDropdownMenus(items) {
+  // Create Blocks of articles categories function
+
+  var dropdownMenus = document.createElement("div");
+  dropdownMenus.classList.add(
+    "dropdown-menu",
+    "position-absolute",
+    "bg-secondary",
+    "border-0",
+    "rounded-0",
+    "w-100",
+    "m-0"
+  );
+  for (let i = 0; i < items.length; i++) {
+    var dropdownItem = document.createElement("a");
+    dropdownItem.classList.add("dropdown-item");
+    dropdownItem.setAttribute("href", "#");
+    dropdownItem.textContent = items[i];
+    dropdownMenus.appendChild(dropdownItem);
+  }
+  return dropdownMenus;
+}
+
 function handleDropdownClick() {
-  // Appending the categories to the drop down menu
+  // Appending the article categories to the drop down menu
 
   var items = this.dataset.myVar;
   var dropdownMenus = createDropdownMenus(JSON.parse(items));
@@ -165,6 +169,9 @@ function handleDropdownClick() {
 }
 
 function retrieveImageAPI() {
+  // Funtion to retrieve images from an API. The items are loaded from the HTML
+  // and a call to API is made for each article
+
   const API_KEY = "6VCJQhc1queGZvJNmpBUuXIVRrohMFo6ES56mMUPIxVviTkapDTbRIn2";
   // Load images from API and set them
   const images = document.getElementsByClassName("img-fluid w-100");
@@ -173,6 +180,7 @@ function retrieveImageAPI() {
     const QUERY = images[i].dataset.product;
     let COLOR = images[i].dataset.color.toLowerCase();
 
+    // Some colors are 'two worded' i.e: 'Light Blue', thus only the second term is considered
     if (COLOR.split(" ").length > 1) {
       COLOR = COLOR.split(" ")[1];
     }
@@ -187,6 +195,7 @@ function retrieveImageAPI() {
     )
       .then((response) => response.json())
       .then((data) => {
+        // Two pictures are taken from each call, one is randomly chosen, so that images are not repeated
         images[i].setAttribute(
           "src",
           data.photos[Math.round(Math.random())].src.tiny
@@ -199,6 +208,7 @@ function retrieveImageAPI() {
 }
 
 function filters() {
+  // Function that filters items by color
   const blackCheckbox = document.getElementById("color-black").checked;
   const whiteCheckbox = document.getElementById("color-white").checked;
   const redCheckbox = document.getElementById("color-red").checked;
@@ -234,6 +244,9 @@ function filters() {
 }
 
 function checkPasswords(event) {
+  // Function that checks the passwords of the register form
+  // The form is stopped from being submitted until passwords are checked
+
   event.preventDefault();
   let password1 = document.getElementById("passwordRegister").value;
   let password2 = document.getElementById("passwordRegister2").value;
@@ -288,7 +301,6 @@ document.addEventListener("DOMContentLoaded", function () {
     );
     table[0].appendChild(displayCart(JSON.parse(localStorage.shoppingCart)));
   }
-
   // Refresh Shopping Cart
   refreshCart();
   // Add Counter to Upper Right Cart Icon
