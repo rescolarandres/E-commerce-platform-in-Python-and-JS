@@ -6,9 +6,9 @@ import json
 
 def connect_tcp_socket() -> sqlalchemy.engine.base.Engine:
     """ Initializes a TCP connection pool for a Cloud SQL instance of MySQL. """
-    db_host = '34.175.44.34'
+    db_host = ''
     db_user = 'root'
-    db_pass = 'capstonedb'
+    db_pass = ''
     db_name = 'main'
     db_port = 3306
 
