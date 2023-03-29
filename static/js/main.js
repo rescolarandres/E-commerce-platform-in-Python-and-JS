@@ -265,6 +265,15 @@ function checkPasswords(event) {
   }
 }
 
+function logout() {
+  // Function to log out users
+  // Logout will only apply if there is a session open
+  if (document.getElementById("emailLink").textContent != "Login") {
+    document.getElementById("logoutText").textContent = "Logout";
+  }
+  return;
+}
+
 // Actions when Load Document
 document.addEventListener("DOMContentLoaded", function () {
   if (window.location.pathname === "/") {
@@ -272,6 +281,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // Cookie with session
     writeCookie("email", document.body.getAttribute("data-my-var"), 0.3);
     document.getElementById("emailLink").textContent += readCookie("email");
+
+    // Call logout function
+    logout();
 
     // Set article images with an API
     retrieveImageAPI();
