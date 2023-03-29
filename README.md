@@ -5,7 +5,7 @@ The system has three main pages: Index, Search and Cart
   ### Index:
   The page that loads when connected to the page. This page offers the following funcionality:
   
-    * Login and register form: you can login if you already have and account or register in case you do not. Passwords are hashed in the database. Cookies are implemented to store the information of the user in the session. The login and register are implemented with Bootstrap modals rather than html files.
+    * Login/Logout and register form: you can login if you already have and account or register in case you do not. Passwords are hashed in the database. Cookies are implemented to store the information of the user in the session. The login and register are implemented with Bootstrap modals rather than html files.
     * Catalog display: a catalog showing 10 articles as a result of the query. Each article shows its real name, color and price.
     * Add to cart: a button that adds an item to the shopping cart. The shopping cart is created using localStorage in javascript. When this button is clicked, the localStorage is either created or updated.
     * Search: a search bar so that the user can search for specific items (names have to be literally as in the catalog). If the user searches for an item, a cookie with the item and its information is created.
